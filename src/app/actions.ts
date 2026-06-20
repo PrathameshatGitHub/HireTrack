@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/db";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client/runtime/library";
 
 // ==========================================
 // APPLICATIONS
