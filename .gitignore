@@ -1,0 +1,74 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+/build/
+
+# production
+/dist
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# prisma
+/prisma/dev.db
+/prisma/dev.db-journal
+
+# generated prisma client (if custom output)
+src/generated/prisma
+
+# uploads
+/uploads
+
+# coverage
+/coverage
+
+# cache
+/.turbo
+/.cache
+
+# vercel
+.vercel
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# temp files
+*.log
+*.tmp
+*.temp
+
+# Supabase local
+.supabase
+
+# dotenv
+.env.*
+!.env.example
+
+# package manager
+.pnpm-store

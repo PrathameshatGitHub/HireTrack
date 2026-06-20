@@ -1,0 +1,147 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Application {
+  id        String   @id @default(uuid())
+  userId    String   // Links to the Supabase Auth User ID
+  company   String
+  role      String
+  salary    String
+  location  String
+  date      String
+  source    String
+  logo      String
+  logoColor String
+  column    String   // 'applied', 'assessment', 'interview', 'offer', 'rejected'
+  notes     String?
+  createdAt DateTime @default(now())
+}
+
+model Contact {
+  id             String   @id @default(uuid())
+  userId         String
+  name           String
+  company        String
+  role           String
+  email          String
+  linkedin       String
+  lastContacted  String
+  status         String   // 'active', 'warm', 'cold'
+  nextFollowUp   String
+  tags           String[]
+  initials       String
+  color          String
+  createdAt      DateTime @default(now())
+}
+
+model Interview {
+  id        String   @id @default(uuid())
+  userId    String
+  company   String
+  role      String
+  salary    String
+  logo      String
+  logoColor String
+  rounds    InterviewRound[]
+  createdAt DateTime @default(now())
+}
+
+model InterviewRound {
+  id          String    @id @default(uuid())
+  interviewId String
+  interview   Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  name        String
+  type        String
+  date        String
+  status      String    // 'completed', 'upcoming', 'scheduled'
+  notes       String?
+  feedback    String?
+  checklist   Json?     // stores list of checklists as JSON: { id: string, label: string, done: boolean }[]
+  createdAt   DateTime  @default(now())
+}
+
+model Task {
+  id        String   @id @default(uuid())
+  userId    String
+  label     String
+  done      Boolean
+  priority  String   // 'high', 'medium', 'low'
+  category  String
+  createdAt DateTime @default(now())
+}
+
+model Goal {
+  id        String   @id @default(uuid())
+  userId    String
+  label     String
+  current   Int
+  target    Int
+  color     String
+  createdAt DateTime @default(now())
+}
+
+model Document {
+  id          String   @id @default(uuid())
+
+  userId      String
+
+  name        String
+  type        String
+  category    String
+
+  size        String
+
+  fileUrl     String
+  storagePath String
+
+  version     String?
+  isDefault   Boolean @default(false)
+
+  createdAt   DateTime @default(now())
+}
+model FollowUp {
+  id        String   @id @default(uuid())
+  userId    String
+  company   String
+  contact   String
+  type      String
+  date      String   // e.g. "Today", "Tomorrow", "Jun 15"
+  time      String   // e.g. "2:00 PM"
+  status    String   // "today" | "missed" | "upcoming"
+  logo      String
+  logoColor String
+  priority  String   // "high" | "medium" | "low"
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model JournalEntry {
+  id        String   @id @default(uuid())
+  userId    String
+  date      String   // e.g. "Jun 17, 2026"
+  title     String
+  preview   String   @db.Text
+  mood      String   // "great" | "okay" | "tough"
+  tags      String[]
+  starred   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Reminder {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  desc      String
+  time      String
+  date      String
+  type      String   // "followup" | "interview" | "deadline" | "task"
+  priority  String   // "high" | "medium" | "low"
+  done      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
