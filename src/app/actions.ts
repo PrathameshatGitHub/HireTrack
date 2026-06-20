@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/db";
-import { Prisma } from "@prisma/client/runtime/library";
+
 
 // ==========================================
 // APPLICATIONS
@@ -191,7 +191,7 @@ export async function addInterview(userId: string, data: {
             date: r.date,
             status: r.status,
             notes: r.notes || null,
-            checklist: r.checklist ?? Prisma.DbNull,
+            checklist: r.checklist ?? null,
           })),
         },
       },
@@ -233,7 +233,7 @@ export async function addInterviewRound(userId: string, interviewId: string, dat
         date: data.date,
         status: data.status,
         notes: data.notes || null,
-        checklist: data.checklist ?? Prisma.DbNull,
+        checklist: data.checklist ?? null,
       },
     });
   } catch (error) {
