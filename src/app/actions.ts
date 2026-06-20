@@ -191,7 +191,7 @@ export async function addInterview(userId: string, data: {
             date: r.date,
             status: r.status,
             notes: r.notes || null,
-            checklist: r.checklist ?? null,
+            checklist: r.checklist ?? [],
           })),
         },
       },
@@ -233,7 +233,7 @@ export async function addInterviewRound(userId: string, interviewId: string, dat
         date: data.date,
         status: data.status,
         notes: data.notes || null,
-        checklist: data.checklist ?? null,
+        checklist: data.checklist || [],
       },
     });
   } catch (error) {
